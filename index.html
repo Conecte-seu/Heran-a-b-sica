@@ -1,0 +1,65 @@
+<?php
+
+class Funcionario {
+
+    public $nome;
+    public $salario;
+
+    function __construct($nome, $salario) {
+        $this->nome = $nome;
+        $this->salario = $salario;
+    }
+
+    function calcularBonus() {
+        return $this->salario * 0.10;
+    }
+
+    function exibirDados() {
+        echo "Nome: " . $this->nome . "<br>";
+        echo "Salário: R$ " . number_format($this->salario, 2, ',', '.') . "<br>";
+        echo "Bônus: R$ " . number_format($this->calcularBonus(), 2, ',', '.') . "<br>";
+    }
+}
+
+class Gerente extends Funcionario {
+
+    function calcularBonus() {
+        return $this->salario * 0.20;
+    }
+
+    function exibirDados() {
+        echo "<h3>Gerente</h3>";
+        parent::exibirDados();
+    }
+}
+
+class Desenvolvedor extends Funcionario {
+
+    function calcularBonus() {
+        return $this->salario * 0.15;
+    }
+
+    function exibirDados() {
+        echo "<h3>Desenvolvedor</h3>";
+        parent::exibirDados();
+    }
+}
+
+$listaFuncionarios = array(
+    new Gerente("Lucas", 10000),
+    new Desenvolvedor("Mariana", 8000),
+    new Gerente("Rafael", 12000),
+    new Desenvolvedor("Beatriz", 6000)
+);
+
+
+// Exibição de todos os funcionários
+
+foreach ($listaFuncionarios as $pessoa) {
+
+    $pessoa->exibirDados();
+
+    echo "<hr>";
+}
+
+?>
